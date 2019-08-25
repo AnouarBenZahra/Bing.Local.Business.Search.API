@@ -10,13 +10,7 @@ namespace Bing.Local.Business.Search.API
 {
     public class Search
     {
-        //const string accessKey = "enter key here";
-
         const string uriBase = "https://api.cognitive.microsoft.com/bing/v7.0/localbusinesses/search";
-
-        //const string searchTerm = "restaurant in Bellevue";
-
-        // Returns search results including relevant headers
         struct SearchResult
         {
             public String jsonResult;
@@ -35,12 +29,12 @@ namespace Bing.Local.Business.Search.API
             HttpWebResponse response = (HttpWebResponse)request.GetResponseAsync().Result;
             string json = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-            // Create result object for return
+           
             var searchResult = new SearchResult();
             searchResult.jsonResult = json;
             searchResult.relevantHeaders = new Dictionary<String, String>();
 
-            // Extract Bing HTTP headers
+            
             foreach (String header in response.Headers)
             {
                 if (header.StartsWith("BingAPIs-") || header.StartsWith("X-MSEdge-"))
